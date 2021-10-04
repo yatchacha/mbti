@@ -46,9 +46,20 @@
         }
         .mbti-title {
             font-size: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .mbti-title span {
+            font-size: 12px;
+            padding: 3px;
         }
         .mbti-user {
             font-size: 14px;
+        }
+        .mbti-user a {
+            text-decoration: none;
+            color: black;
         }
         @media(max-width: 400px) {
             .mbti-user {
@@ -135,16 +146,51 @@
             "ESTJ", "ESFJ", "ENFJ", "ENTJ"
         ];
         $(document).ready(function() {
+            // mbti.json 에서 데이터 받아와서 뿌려주기
+            // @todo api 만들어서 ajax 호출해서 받아오는 방식으로 변경 (MongoDB나 DynamoDB 이용)
             $.getJSON("mbti.json", function(data) {
                 data.forEach(user => {
                     mbti_list.forEach(mbti => {
                         if (user["mbti"] == mbti) {
-                            $("#" + mbti).append("<span class=\"mbti-user\">" + user["tw_name"] + "</span>");
+                            $("#" + mbti).append("<span class=\"mbti-user\"><a href=\"https://twitch.tv/" + user["tw_id"] + "\" target=\"_blank\">" + user["tw_name"] + "</span>");
                         }
                     });
                 });
+                setMBTI();
+                setBadge();
             });
+
+            // @todo update_log.json 파싱해서 최근 3일 이내 업데이트 내역 있으면 업데이트 로그 표시
         });
+
+        function setMBTI() {
+            mbti_list.forEach(mbti => {
+                let link = "https://www.16personalities.com/ko/%EC%84%B1%EA%B2%A9%EC%9C%A0%ED%98%95-" + mbti;
+                $("#" + mbti + " .mbti-title").attr("onclick", "window.open(\"" + link + "\")");
+            });
+        }
+
+        // mbti별로 child 수 계산해서 mbti에 해당되는 유저가 1명 이상 있을 경우 숫자 badge로 표시
+        function setBadge() {
+            let largest_num = -1;
+            mbti_list.forEach(mbti => {
+                let mbti_children_num = $("#" + mbti + " span").length - 1;
+                if (largest_num < mbti_children_num) {
+                    largest_num = mbti_children_num;
+                }
+            });
+
+            mbti_list.forEach(mbti => {
+                let mbti_children_num = $("#" + mbti + " span").length - 1;
+                if (mbti_children_num > 0) {
+                    if (largest_num == mbti_children_num) {
+                        $("#" + mbti + " .mbti-title").append("&nbsp;<span class=\"badge badge-pill badge-primary\">" + mbti_children_num + "</span>");
+                    } else {
+                        $("#" + mbti + " .mbti-title").append("&nbsp;<span class=\"badge badge-pill badge-secondary\">" + mbti_children_num + "</span>");
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
