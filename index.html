@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -67,6 +67,15 @@
             text-decoration: none;
             color: black;
         }
+        .footer {
+            margin-top: 30px;
+            font-family: 'Noto Sans KR', sans-serif !important;
+            font-size: 12px;
+        }
+        .footer p {
+            display: flex;
+            justify-content: space-evenly;
+        }
         @media(max-width: 400px) {
             .mbti-user {
                 font-size: 12px !important;
@@ -81,8 +90,10 @@
 </head>
 <body>
     <div id="main">
-        <div id="header" style="text-align: center; margin: 20px 0">
-            <span style="font-size: 24px">달차네 칭구칭긔 MBTI</span>
+        <div id="header" style="margin: 20px 0; display: flex; justify-content: center;">
+            <span style="font-size: 24px; display: flex; align-items: center;">달차네 칭구칭긔 MBTI
+                <i class="fas fa-question-circle" style="margin-left: 5px; font-size: 14px; color: lightgrey" data-toggle="tooltip" data-placement="bottom" title="MBTI를 누르면 16 Personalities 사이트로, 닉네임을 누르면 트위치 사이트로 이동합니다!"></i>
+            </span>
         </div>
         <div class="wrapper">
             <div class="mbti-wrapper">
@@ -142,6 +153,13 @@
                 </div>
             </div>
         </div>
+        <div class="footer">
+            <p style="text-align: center; font-weight: 100;">
+                <span>본 웹사이트의 정보는 사실과 다를 수 있습니다</span>
+                <span><a href="https://github.com/yatchacha/mbti" target="_blank">소스코드</a></span>
+                <span><a href="mailto:hyeonwoo5342@gmail.com" target="_blank">개인정보 처리 문의</a></span>
+            </p>
+        </div>
     </div>
 
     <script>
@@ -165,6 +183,8 @@
                 setMBTI();
                 setBadge();
             });
+
+            $('[data-toggle="tooltip"]').tooltip();
 
             // @todo update_log.json 파싱해서 최근 3일 이내 업데이트 내역 있으면 업데이트 로그 표시
         });
