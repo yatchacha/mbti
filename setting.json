@@ -2,14 +2,17 @@
     "groups": [
         {
             "name": "유달차",
+            "name_en": "yatchacha",
             "color": "#000000"
         },
         {
             "name": "칭구칭긔",
+            "name_en": "friends",
             "color": "#000000"
         },
         {
             "name": "군인",
+            "name_en": "tao",
             "color": "#000000"
         }
     ]
