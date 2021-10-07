@@ -177,7 +177,6 @@
             "ESTJ", "ESFJ", "ENFJ", "ENTJ"
         ];
         $(document).ready(function() {
-            // mbti.json 에서 데이터 받아와서 뿌려주기
             // @todo api 만들어서 ajax 호출해서 받아오는 방식으로 변경 (MongoDB나 DynamoDB 이용)
             $.getJSON("mbti.json", function(data) {
                 data.forEach(user => {
