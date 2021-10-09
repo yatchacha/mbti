@@ -12,7 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         body {
             font-family: 'Jua', sans-serif;
@@ -177,23 +178,31 @@
             "ESTJ", "ESFJ", "ENFJ", "ENTJ"
         ];
         $(document).ready(function() {
-            // mbti.json 에서 데이터 받아와서 뿌려주기
-            // @todo api 만들어서 ajax 호출해서 받아오는 방식으로 변경 (MongoDB나 DynamoDB 이용)
-            $.getJSON("mbti.json", function(data) {
-                data.forEach(user => {
-                    mbti_list.forEach(mbti => {
-                        if (user["mbti"] == mbti) {
-                            $("#" + mbti).append("<span class=\"mbti-user\"><a href=\"https://twitch.tv/" + user["tw_id"] + "\" target=\"_blank\">" + user["tw_name"] + "</span>");
-                        }
+            $.ajax({
+                type: "GET",
+                url: "http://api.yatchacha.com/mbti/user"
+            })
+            .done(function(data) {
+                if (data['result'] == 'success') {
+                    let mbti_data = data['data'][0]['data'];
+                    mbti_data.forEach(user => {
+                        mbti_list.forEach(mbti => {
+                            if (user["mbti"] == mbti) {
+                                $("#" + mbti).append("<span class=\"mbti-user\"><a href=\"https://twitch.tv/" + user["tw_id"] + "\" target=\"_blank\">" + user["tw_name"] + "</span>");
+                            }
+                        });
                     });
-                });
-                setMBTI();
-                setBadge();
+                    setMBTI();
+                    setBadge();
+                } else {
+                    console.log('error');
+                }
+            })
+            .fail(function(data) {
+                console.log('error');
             });
 
             $('[data-toggle="tooltip"]').tooltip();
-
-            // @todo update_log.json 파싱해서 최근 3일 이내 업데이트 내역 있으면 업데이트 로그 표시
         });
 
         function setMBTI() {
@@ -224,14 +233,6 @@
                 }
             });
         }
-
-        // function getUser() {
-        //     $.ajax
-        // }
-
-        // function setUser() {
-
-        // }
 
         function setStyle() {
             // @todo 그룹별 정보를 받아서 스타일을 지정
