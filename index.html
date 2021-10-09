@@ -13,10 +13,37 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    
     <style>
+        .darkmode--activated #main {
+            color: white !important;
+        }
+        .darkmode--activated #main div {
+            border-color: white;
+        }
+        .darkmode--activated #main .mbti-user a {
+            color: white !important;
+        }
+        .darkmode-layer {
+            background: #212529 !important;
+            mix-blend-mode: unset !important;
+            z-index: -10;
+        }
+        .darkmode-background {
+            background: white;
+            position: fixed;
+            pointer-events: none;
+            z-index: -10;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
         body {
             font-family: 'Jua', sans-serif;
+            background-color: white;
             -ms-overflow-style: none;
         }
         ::-webkit-scrollbar {
@@ -76,6 +103,10 @@
             display: flex;
             justify-content: space-evenly;
             flex-wrap: wrap;
+        }
+        .swal2-title {
+            font-family: 'Noto Sans KR', sans-serif !important;
+            font-weight: 500;
         }
         @media(max-width: 400px) {
             .mbti {
@@ -171,6 +202,18 @@
     </div>
 
     <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'bottom-start',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: false,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
         const mbti_list = [
             "ISTJ", "ISFJ", "INFJ", "INTJ",
             "ISTP", "ISFP", "INFP", "INTP",
@@ -194,12 +237,29 @@
                     });
                     setMBTI();
                     setBadge();
+                    Toast.fire({
+                        icon: 'success',
+                        title: data['message_ko']
+                    });
                 } else {
-                    console.log('error');
+                    console.log(data);
+                    let msg = '데이터 로딩에 실패했습니다';
+                    if (data['message_ko'] != '') {
+                        msg = data['message_ko'];
+                    } 
+                    Toast.fire({
+                        icon: 'error',
+                        title: msg
+                    });
                 }
             })
             .fail(function(data) {
-                console.log('error');
+                console.log(data);
+                let msg = '데이터 로딩에 실패했습니다';
+                Toast.fire({
+                    icon: 'error',
+                    title: msg
+                });
             });
 
             $('[data-toggle="tooltip"]').tooltip();
@@ -234,10 +294,35 @@
             });
         }
 
+        function updateData() {
+
+        }
+
         function setStyle() {
             // @todo 그룹별 정보를 받아서 스타일을 지정
             
         }
-    </script>
+
+        function addDarkmodeWidget() {
+            const options = {
+                // bottom: '64px', // default: '32px'
+                // right: 'unset', // default: '32px'
+                // left: '32px', // default: 'unset'
+                time: '0.2s', // default: '0.3s'
+                mixColor: '#fff', // default: '#fff'
+                backgroundColor: '#fff',  // default: '#fff'
+                buttonColorDark: '#100f2c',  // default: '#100f2c'
+                buttonColorLight: '#fff', // default: '#fff'
+                // saveInCookies: false, // default: true,
+                label: '🌓', // default: ''
+                autoMatchOsTheme: true // default: true
+            }
+
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+
+</script>
 </body>
 </html>
