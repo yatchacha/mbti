@@ -6,23 +6,29 @@ import axios from 'axios';
 import '../Style/Home.css';
 
 const Home = () => {
+  /**
+   * 참고 : https://velog.io/@mgk8609/React%EC%97%90%EC%84%9C-Axios-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+   */
 
-  const fetchData = axios.get('http://api.yatchacha.com/mbti/user')
-  .then((Response)=>{
-    if (Response.data.result === 'success') {
-      console.log('success');
-    } else {
-      console.log('fail');
-    }
-    console.log(Response.data);
-  }).catch((Error)=>{
-    console.log(Error);
-  });
-
-  function loadData() {
-
+  const [users, setUsers] = useState(null);
+  const loadUsers = async () => {
+    axios
+      .get('http://api.yatchacha.com/mbti/user')
+      .then((Response)=>{
+        if (Response.data.result === 'success') {
+          result = Response.data.data[0].data;
+        }
+      })
+      .then(() => {
+        console.log('dd');
+        console.log(result);
+        // setUsers(result)
+      })
   }
-
+  // let resultData = ;
+  
+  console.log(users);
+  // console.log(users);
   return (
     <div className="totalWrapper">
       <TemplateHeader />
