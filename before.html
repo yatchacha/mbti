@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>달차네 칭구칭긔</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    
+    <style>
+        .darkmode--activated #main {
+            color: white !important;
+        }
+        .darkmode--activated #main div {
+            border-color: white;
+        }
+        .darkmode--activated #main .mbti-user a {
+            color: white !important;
+        }
+        .darkmode-layer {
+            background: #212529 !important;
+            mix-blend-mode: unset !important;
+            z-index: -10;
+        }
+        .darkmode-background {
+            background: white;
+            position: fixed;
+            pointer-events: none;
+            z-index: -10;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        body {
+            font-family: 'Jua', sans-serif;
+            background-color: white;
+            -ms-overflow-style: none;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        #main {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100vw;
+            max-height: 500px;
+        }
+        .mbti-wrapper {
+            display: flex;
+            justify-content: space-around;
+            height: 100%;
+        }
+        .mbti {
+            display: flex;
+            border: 2px solid black;
+            border-radius: 20px;
+            width: 100%;
+            max-height: 130px;
+            overflow: auto;
+            justify-content: flex-start;
+            margin: 2px;
+            align-items: center;
+            flex-direction: column;
+        }
+        .mbti-title {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .mbti-title span {
+            font-size: 12px;
+            padding: 3px;
+        }
+        .mbti-user {
+            font-size: 14px;
+        }
+        .mbti-user a {
+            text-decoration: none;
+            color: black;
+        }
+        .footer {
+            margin-top: 30px;
+            font-family: 'Noto Sans KR', sans-serif !important;
+            font-size: 12px;
+        }
+        .footer p {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+        .swal2-title {
+            font-family: 'Noto Sans KR', sans-serif !important;
+            font-weight: 500;
+        }
+        @media(max-width: 400px) {
+            .mbti {
+                max-height: 115px !important;
+            }
+            .mbti-user {
+                font-size: 12px !important;
+            }
+        }
+        @media(max-width: 340px) {
+            .mbti {
+                max-height: 100px !important;
+            }
+            .mbti-user {
+                font-size: 10px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="header" style="margin: 20px 0; display: flex; justify-content: center;">
+            <span style="font-size: 24px; display: flex; align-items: center;">달차네 칭구칭긔 MBTI
+                <i class="fas fa-question-circle" style="margin-left: 5px; font-size: 14px; color: lightgrey" data-toggle="tooltip" data-placement="bottom" title="MBTI를 누르면 16 Personalities 사이트로, 닉네임을 누르면 트위치 사이트로 이동합니다!"></i>
+            </span>
+        </div>
+        <div class="wrapper">
+            <div class="mbti-wrapper">
+                <div id="ISTJ" class="mbti">
+                    <span class="mbti-title">ISTJ</span>
+                </div>
+                <div id="ISFJ" class="mbti">
+                    <span class="mbti-title">ISFJ</span>
+                </div>
+                <div id="INFJ" class="mbti">
+                    <span class="mbti-title">INFJ</span>
+                </div>
+                <div id="INTJ" class="mbti">
+                    <span class="mbti-title">INTJ</span>
+                </div>
+            </div>
+            <div class="mbti-wrapper">
+                <div id="ISTP" class="mbti">
+                    <span class="mbti-title">ISTP</span>
+                </div>
+                <div id="ISFP" class="mbti">
+                    <span class="mbti-title">ISFP</span>
+                </div>
+                <div id="INFP" class="mbti">
+                    <span class="mbti-title">INFP</span>
+                </div>
+                <div id="INTP" class="mbti">
+                    <span class="mbti-title">INTP</span>
+                </div>
+            </div>
+            <div class="mbti-wrapper">
+                <div id="ESTP" class="mbti">
+                    <span class="mbti-title">ESTP</span>
+                </div>
+                <div id="ESFP" class="mbti">
+                    <span class="mbti-title">ESFP</span>
+                </div>
+                <div id="ENFP" class="mbti">
+                    <span class="mbti-title">ENFP</span>
+                </div>
+                <div id="ENTP" class="mbti">
+                    <span class="mbti-title">ENTP</span>
+                </div>
+            </div>
+            <div class="mbti-wrapper">
+                <div id="ESTJ" class="mbti">
+                    <span class="mbti-title">ESTJ</span>
+                </div>
+                <div id="ESFJ" class="mbti">
+                    <span class="mbti-title">ESFJ</span>
+                </div>
+                <div id="ENFJ" class="mbti">
+                    <span class="mbti-title">ENFJ</span>
+                </div>
+                <div id="ENTJ" class="mbti">
+                    <span class="mbti-title">ENTJ</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p style="text-align: center; font-weight: 100;">
+                <span>본 웹사이트의 정보는 사실과 다를 수 있습니다</span>
+                <span><a href="https://github.com/yatchacha/mbti" target="_blank">소스코드</a></span>
+                <span><a href="http://api.yatchacha.com/docs" target="_blank">Open API</a></span>
+                <span><a href="mailto:hyeonwoo5342@gmail.com" target="_blank">개인정보 처리 문의</a></span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'bottom-start',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: false,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        const mbti_list = [
+            "ISTJ", "ISFJ", "INFJ", "INTJ",
+            "ISTP", "ISFP", "INFP", "INTP",
+            "ESTP", "ESFP", "ENFP", "ENTP",
+            "ESTJ", "ESFJ", "ENFJ", "ENTJ"
+        ];
+        $(document).ready(function() {
+            $.ajax({
+                type: "GET",
+                url: "http://api.yatchacha.com/mbti/user"
+            })
+            .done(function(data) {
+                if (data['result'] == 'success') {
+                    let mbti_data = data['data'][0]['data'];
+                    mbti_data.forEach(user => {
+                        mbti_list.forEach(mbti => {
+                            if (user["mbti"] == mbti) {
+                                $("#" + mbti).append("<span class=\"mbti-user\"><a href=\"https://twitch.tv/" + user["tw_id"] + "\" target=\"_blank\">" + user["tw_name"] + "</span>");
+                            }
+                        });
+                    });
+                    setMBTI();
+                    setBadge();
+                    Toast.fire({
+                        icon: 'success',
+                        title: data['message_ko']
+                    });
+                } else {
+                    console.log(data);
+                    let msg = '데이터 로딩에 실패했습니다';
+                    if (data['message_ko'] != '') {
+                        msg = data['message_ko'];
+                    } 
+                    Toast.fire({
+                        icon: 'error',
+                        title: msg
+                    });
+                }
+            })
+            .fail(function(data) {
+                console.log(data);
+                let msg = '데이터 로딩에 실패했습니다';
+                Toast.fire({
+                    icon: 'error',
+                    title: msg
+                });
+            });
+
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        function setMBTI() {
+            mbti_list.forEach(mbti => {
+                let link = "https://www.16personalities.com/ko/%EC%84%B1%EA%B2%A9%EC%9C%A0%ED%98%95-" + mbti;
+                $("#" + mbti + " .mbti-title").attr("onclick", "window.open(\"" + link + "\")");
+            });
+        }
+
+        // mbti별로 child 수 계산해서 mbti에 해당되는 유저가 1명 이상 있을 경우 숫자 badge로 표시
+        function setBadge() {
+            let largest_num = -1;
+            mbti_list.forEach(mbti => {
+                let mbti_children_num = $("#" + mbti + " span").length - 1;
+                if (largest_num < mbti_children_num) {
+                    largest_num = mbti_children_num;
+                }
+            });
+
+            mbti_list.forEach(mbti => {
+                let mbti_children_num = $("#" + mbti + " span").length - 1;
+                if (mbti_children_num > 0) {
+                    if (largest_num == mbti_children_num) {
+                        $("#" + mbti + " .mbti-title").append("&nbsp;<span class=\"badge badge-pill badge-primary\">" + mbti_children_num + "</span>");
+                    } else {
+                        $("#" + mbti + " .mbti-title").append("&nbsp;<span class=\"badge badge-pill badge-secondary\">" + mbti_children_num + "</span>");
+                    }
+                }
+            });
+        }
+
+        function updateData() {
+
+        }
+
+        function setStyle() {
+            // @todo 그룹별 정보를 받아서 스타일을 지정
+            
+        }
+
+        function addDarkmodeWidget() {
+            const options = {
+                bottom: '18px', // default: '32px'
+                right: '18px', // default: '32px'
+                // left: '32px', // default: 'unset'
+                time: '0.2s', // default: '0.3s'
+                mixColor: '#fff', // default: '#fff'
+                backgroundColor: '#fff',  // default: '#fff'
+                buttonColorDark: '#100f2c',  // default: '#100f2c'
+                buttonColorLight: '#fff', // default: '#fff'
+                // saveInCookies: false, // default: true,
+                label: '🌓', // default: ''
+                autoMatchOsTheme: true // default: true
+            }
+
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+
+</script>
+</body>
+</html>
