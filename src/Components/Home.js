@@ -42,7 +42,8 @@ const Home = () => {
         if (isInit) loadMbti();
       });
   }
-
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent)
+  
   return (
     <div className="totalWrapper">
       <TemplateHeader />
@@ -69,7 +70,7 @@ const Home = () => {
           })
         }
       </div>
-      <ReactTooltip id="tooltipComp" />
+      <ReactTooltip id="tooltipComp" globalEventOff={isMobile ? 'click' : undefined} />
       <TemplateFooter />
     </div>
   );

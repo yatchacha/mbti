@@ -69,6 +69,7 @@ const User = ({match}) => {
           });
       })
   }
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent)
 
   if (isUserSet === -1) {
     return (
@@ -120,7 +121,7 @@ const User = ({match}) => {
               </div>
             </div>
           </div>
-          <ReactTooltip id="tooltipComp" />
+          <ReactTooltip id="tooltipComp" globalEventOff={isMobile ? 'click' : undefined} />
         </div>
       </>
     );
