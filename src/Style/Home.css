@@ -51,8 +51,6 @@
     font-family: 'Jua', sans-serif;
     background-color: white;
     -ms-overflow-style: none;
-
-    
 }
 a:link { color: black; text-decoration: none;}
 a:visited { color: black; text-decoration: none;}
@@ -90,10 +88,10 @@ a:hover { color: black; text-decoration: underline;}
     font-size: 12px;
     padding: 3px;
 }
-.mbti-user {
+.mbtiUser {
     font-size: 14px;
 }
-.mbti-user a {
+.mbtiUser a {
     text-decoration: none;
     color: black;
 }
@@ -107,15 +105,29 @@ a:hover { color: black; text-decoration: underline;}
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
+.noto {
+    font-family: 'Noto Sans KR', sans-serif !important;
+}
+.jua {
+    font-family: 'Jua', sans-serif !important;
+}
 .swal2-title {
     font-family: 'Noto Sans KR', sans-serif !important;
     font-weight: 500;
+}
+.homeLogo {
+    width: '26px' !important;
+    margin: '1px' !important;
+    border-radius: '24px' !important;
+}
+.logo {
+    box-shadow: 2px 2px 4px #ccc;
 }
 @media(max-width: 400px) {
     .mbti {
         max-height: 115px !important;
     }
-    .mbti-user {
+    .mbtiUser {
         font-size: 12px !important;
     }
 }
@@ -123,7 +135,7 @@ a:hover { color: black; text-decoration: underline;}
     .mbti {
         max-height: 100px !important;
     }
-    .mbti-user {
+    .mbtiUser {
         font-size: 10px !important;
     }
 }
